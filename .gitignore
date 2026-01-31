@@ -1,2 +1,3 @@
 obj/
 bin/
+csharp/tests/DiceGame3.Tests/DieFaceTests.cs
