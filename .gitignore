@@ -1,3 +1,10 @@
 obj/
 bin/
 csharp/tests/DiceGame3.Tests/DieFaceTests.cs
+
+
+
+
+
+
+rust/dice_game_3/target/
