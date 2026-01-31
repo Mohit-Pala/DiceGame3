@@ -1,0 +1,5 @@
+{
+  "rust-analyzer.linkedProjects": [
+    "./rust/dice_game_3/Cargo.toml"
+  ]
+}
