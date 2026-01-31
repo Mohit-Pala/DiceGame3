@@ -1,6 +1,6 @@
 namespace DiceGame3.Enums;
 
-public enum DieFaces
+public enum DieFaceValues
 {
   One,
   Two,
