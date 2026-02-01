@@ -9,7 +9,7 @@ namespace DiceGame3.Helpers
     {
       int[] freqMap = new int[7];
       SetupFrequencies(diceValues, freqMap);
-      return new DieScoringResult();
+      return CalcScoreForStraight(freqMap);
     }
 
     // pop the freq map, inc one for each face value, need to find a wa y to store wildcards nexy
