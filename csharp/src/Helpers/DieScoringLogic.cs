@@ -98,6 +98,8 @@ namespace DiceGame3.Helpers
 
     private static DieScoringResult CalcScoreForFaceValues(int[] freqMap, int faceValue)
     {
+      if (faceValue > 6) return new DieScoringResult(); // mf forgot the base case
+      
       DieScoringResult result = new DieScoringResult();
 
       // keep track of the current dice face being scored
