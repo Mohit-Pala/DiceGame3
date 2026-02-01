@@ -27,7 +27,7 @@
 using System;
 using System.Collections.Generic;
 
-var diceValues = new List<int> { 1,1,1, 5,5,5, 5,  1,1,1,1,1,1 };
+var diceValues = new List<int> { 1,2,3,4,5,6 };
 var result = DiceGame3.Helpers.DieScoringCalculator.CalcScore(diceValues);
 Console.WriteLine(result.Score);
 Console.WriteLine(result.AlreadyScoredDieCount);
