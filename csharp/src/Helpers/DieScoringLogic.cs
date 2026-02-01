@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DiceGame3.Models;
 
@@ -64,7 +65,7 @@ namespace DiceGame3.Helpers
       // check high straight, cus ts score more points
       if (FacesPresentInRange(freqMap, 2, 6))
       {
-        DecreaseFrequencies(freqMap, 2, 6); 
+        DecreaseFrequencies(freqMap, 2, 6);
         result.Score += 750;
         result.AlreadyScoredDieCount += 5;
 
@@ -77,7 +78,7 @@ namespace DiceGame3.Helpers
       // check low straight
       if (FacesPresentInRange(freqMap, 1, 5))
       {
-        DecreaseFrequencies(freqMap, 1, 5); 
+        DecreaseFrequencies(freqMap, 1, 5);
         result.Score += 500;
         result.AlreadyScoredDieCount += 5;
 
@@ -99,7 +100,7 @@ namespace DiceGame3.Helpers
     private static DieScoringResult CalcScoreForFaceValues(int[] freqMap, int faceValue)
     {
       if (faceValue > 6) return new DieScoringResult(); // mf forgot the base case
-      
+
       DieScoringResult result = new DieScoringResult();
 
       // keep track of the current dice face being scored
@@ -111,17 +112,34 @@ namespace DiceGame3.Helpers
         // calc score for three of a kind, then mult by 2 4 8 for 4 5 6 of a kind
         var baseScoreForMultiples = faceValue == 1 ? 1000 : faceValue * 100;
 
+        // score 6 first then recuese for remaingin dice
+        int diceToScore = Math.Min(count, 6);
+        int residualDice = count - diceToScore;
+
         var multiplier = 1;
-        if (count == 4) multiplier = 2;
-        if (count == 5) multiplier = 4;
-        if (count == 6) multiplier = 8;
+        if (diceToScore == 4) multiplier = 2;
+        if (diceToScore == 5) multiplier = 4;
+        if (diceToScore == 6) multiplier = 8;
 
         result.Score += baseScoreForMultiples * multiplier;
-        result.AlreadyScoredDieCount += count;
-        count = 0;
+        result.AlreadyScoredDieCount += diceToScore;
+
+        if (residualDice > 0)
+        {
+          int originalCount = freqMap[faceValue];
+          freqMap[faceValue] = residualDice;
+
+          DieScoringResult residualResult = CalcScoreForFaceValues(freqMap, faceValue);
+          result.Score += residualResult.Score;
+          result.AlreadyScoredDieCount += residualResult.AlreadyScoredDieCount;
+          freqMap[faceValue] = originalCount;
+        }
+        DieScoringResult nextFaceResult = CalcScoreForFaceValues(freqMap, faceValue + 1);
+        result.Score += nextFaceResult.Score;
+        result.AlreadyScoredDieCount += nextFaceResult.AlreadyScoredDieCount;
+        return result;
       }
 
-      // 1 and 5 spwcial casw
       if (count > 0)
       {
         if (faceValue == 1)
@@ -141,7 +159,7 @@ namespace DiceGame3.Helpers
       DieScoringResult remainingScore = CalcScoreForFaceValues(freqMap, faceValue + 1);
       result.Score += remainingScore.Score;
       result.AlreadyScoredDieCount += remainingScore.AlreadyScoredDieCount;
-      
+
       return result;
     }
   }
