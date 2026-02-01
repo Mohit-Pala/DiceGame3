@@ -2,3 +2,5 @@ obj/
 bin/
 csharp/tests/DiceGame3.Tests/DieFaceTests.cs
 csharp/tests/DiceGame3.Tests/DieScoringLogicTests.cs
+out.log
+csharp/tests/DiceGame3.Tests/DieScoringLogicMoreThan6DiceTests.cs
