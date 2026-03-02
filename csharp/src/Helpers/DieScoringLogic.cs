@@ -1,25 +1,34 @@
 using System;
 using System.Collections.Generic;
 using DiceGame3.Models;
+using DiceGame3.Enums;
 
 namespace DiceGame3.Helpers
 {
   public static class DieScoringCalculator
   {
-    public static DieScoringResult CalcScore(List<int> diceValues)
+    public static DieScoringResult CalcScore(List<DieFaceValues> diceFaces)
     {
       int[] freqMap = new int[7];
-      SetupFrequencies(diceValues, freqMap);
+      SetupFrequencies(diceFaces, freqMap);
       return CalcScoreForStraight(freqMap);
     }
 
-    // pop the freq map, inc one for each face value, need to find a wa y to store wildcards nexy
-    private static void SetupFrequencies(List<int> diceValues, int[] freqMap)
+    // pop the freq map, inc one for each face value, need to find a wa y to store wildcards nixy
+
+    // now that this shis mapping, the tests wont work
+
+    // todo, shit above
+    private static void SetupFrequencies(List<DieFaceValues> diceFaces, int[] freqMap)
     {
-      foreach (var faceValue in diceValues)
+      foreach (var face in diceFaces)
       {
-        // store each frequency in the array in the end there should be 1 to 6 
-        freqMap[faceValue]++;
+        if (face == DieFaceValues.WildCard) continue; // skip wildcards, need to do this later 
+        int faceValue = (int)face; // ts is 1 indexed so we can use thq values directly 
+        if (faceValue >= 1 && faceValue <= 6)
+        {
+          freqMap[faceValue]++;
+        }
       }
     }
 
