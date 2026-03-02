@@ -1,5 +1,4 @@
 obj/
 bin/
-csharp/tests/DiceGame3.Tests/DieScoringLogicTests.cs
 out.log
-csharp/tests/DiceGame3.Tests/DieScoringLogicMoreThan6DiceTests.cs
+csharp/tests/
