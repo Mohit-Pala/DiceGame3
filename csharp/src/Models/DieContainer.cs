@@ -4,11 +4,18 @@ namespace DiceGame3.Models
 {
     public class DieContainer
     {
-        public int DiceId { get; set; }
+        public Guid DiceId { get; set; }
         public string DiceName { get; set; }
         public Die Die { get; set; }
 
-        public DieContainer(int diceId, string diceName, Die die)
+        public DieContainer(string diceName, Die die)
+        {
+            DiceId = Guid.NewGuid();
+            DiceName = diceName;
+            Die = die;
+        }
+
+        public DieContainer(Guid diceId, string diceName, Die die)
         {
             DiceId = diceId;
             DiceName = diceName;

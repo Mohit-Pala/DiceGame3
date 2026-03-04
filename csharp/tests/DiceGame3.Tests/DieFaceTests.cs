@@ -10,19 +10,19 @@ namespace DiceGame3.Tests
         [Fact]
         public void Constructor_SetsPropertiesCorrectly()
         {
-            var diceFace = new DieFace(DieFaceValues.Two, 0.3f);
+            var diceFace = new DieFace(DieFaceValues.Two, 3);
             Assert.Equal(DieFaceValues.Two, diceFace.FaceValue);
             Assert.False(diceFace.IsWildCard);
-            Assert.Equal(0.3f, diceFace.Weight);
+            Assert.Equal(3, diceFace.Weight);
         }
 
         [Fact]
         public void Constructor_WithWildCardFlag_SetsIsWildCard()
         {
-            var df = new DieFace(DieFaceValues.WildCard, true, 0.2f);
+            var df = new DieFace(DieFaceValues.WildCard, true, 2);
             Assert.Equal(DieFaceValues.WildCard, df.FaceValue);
             Assert.True(df.IsWildCard);
-            Assert.Equal(0.2f, df.Weight);
+            Assert.Equal(2, df.Weight);
         }
     }
 }
